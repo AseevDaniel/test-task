@@ -1,18 +1,12 @@
-import "./form-field.scss";
-import { Input } from "../Input/index.jsx";
+import { Input } from "../Input";
 import PropTypes from "prop-types";
 
-export const FormField = ({ patterns, name, onChange, ...props }) => {
-  const onInputValueChange = (e) => {
-    const result = patterns(e.target.value);
-    console.log(result);
+import "./form-field.scss";
 
-    onChange(e);
-  };
-
+export const FormField = ({ name, ...props }) => {
   return (
     <div className="formField">
-      <Input {...props} onChange={onInputValueChange} placeholder=" " />
+      <Input {...props} name={name} placeholder=" " />
       <label>{name}</label>
     </div>
   );
@@ -20,6 +14,4 @@ export const FormField = ({ patterns, name, onChange, ...props }) => {
 
 FormField.propTypes = {
   name: PropTypes.string,
-  onChange: PropTypes.func,
-  patterns: PropTypes.func,
 };

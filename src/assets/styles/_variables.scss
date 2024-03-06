@@ -3,8 +3,15 @@ $transition-duration: 0.3s;
 
 // colors
 $color-main-light: white;
+$color-theme-light: #b4d600;
+$color-theme-light-hover: #c3de33;
+$color-main-border: #c7c7c7;
 
 $color-main-text: #454545;
 $color-main-text-07: rgba(69, 69, 69, 0.7);
 
-$color-main-border: #c7c7c7;
+$color-disabled: #eeeeee;
+$color-error: #ec1414;
+
+// sizes
+$block-min-height: 44px;
