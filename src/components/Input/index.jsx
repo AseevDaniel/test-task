@@ -1,5 +1,5 @@
 import "./input.scss";
 
-export const Input = () => {
-  return <div className="input">input</div>;
+export const Input = (props) => {
+  return <input className="input" type="text" {...props} />;
 };
