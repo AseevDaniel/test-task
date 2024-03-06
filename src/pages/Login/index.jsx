@@ -8,6 +8,7 @@ import {
 import { emailErrors, passwordErrors } from "../../constants/errors.js";
 
 import "./login.scss";
+import { Link } from "../../components/index.js";
 
 export const Login = () => {
   const [isFirstSubmit, setIsFirstSubmit] = useState(true);
@@ -42,8 +43,8 @@ export const Login = () => {
   return (
     <div className="login">
       <h2>Login</h2>
-      <form className="login-form" onSubmit={handleSubmitEvent}>
-        <div className="form_control">
+      <form className="loginForm" onSubmit={handleSubmitEvent}>
+        <div className="formControl">
           <FormField
             name="email"
             onChange={handleInput}
@@ -54,14 +55,15 @@ export const Login = () => {
             errorMessages={emailErrors}
           />
         </div>
-        <div className="form_control">
+        <div className="formControl">
           <FormField
             name="password"
+            type="password"
             onChange={handleInput}
             isError={isPasswordError}
           />
           <ErrorPermissions
-            title={"Your password should:"}
+            title="Your password should:"
             currentPermissions={passwordPattern(input.password)}
             errorMessages={passwordErrors}
           />
@@ -69,6 +71,10 @@ export const Login = () => {
         <Button disabled={isDisableSubmit} type="submit">
           Submit
         </Button>
+
+        <span className="registerLink">
+          You don`t have an account? <Link>Register now</Link>
+        </span>
       </form>
     </div>
   );

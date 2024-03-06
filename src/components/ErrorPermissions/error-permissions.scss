@@ -4,8 +4,8 @@
     text-align: left;
     @include font-josefin(
       $weight: medium,
-      $size: 12px,
-      $colour: #454545,
+      $size: 14px,
+      $colour: $color-main-text,
       $lh: 16px
     );
   }
@@ -27,9 +27,9 @@
       width: 100%;
       text-align: left;
       @include font-josefin(
-        $weight: medium,
-        $size: 12px,
-        $colour: #454545,
+        $weight: light,
+        $size: 14px,
+        $colour: $color-main-text,
         $lh: 16px
       );
 
@@ -49,13 +49,7 @@
 
       &--valid {
         &::before {
-          content: "";
-          display: inline-block;
-          margin-right: 8px;
-          width: 6px;
-          height: 6px;
           background: $color-theme-light-hover;
-          border-radius: 50%;
         }
       }
     }

@@ -3,11 +3,9 @@ import PropTypes from "prop-types";
 
 export const Input = ({ isError, ...props }) => {
   return (
-    <input
-      className={`input ${isError ? "input-error" : ""}`}
-      type="text"
-      {...props}
-    />
+    <>
+      <input className={`input ${isError ? "input-error" : ""}`} {...props} />
+    </>
   );
 };
 

@@ -3,4 +3,5 @@
   align-items: center;
   justify-content: center;
   height: 100vh;
+  background: rgba(60, 60, 60, 0.1);
 }
