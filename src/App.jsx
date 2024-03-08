@@ -1,33 +1,34 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
+import { Routes, Route, BrowserRouter } from "react-router-dom";
+import { Loader, PrivateRoute, ActionPopup, Modal } from "./components";
+import { AdminPanel, Login, Register, NotFound } from "./pages";
+import AuthProvider from "./store/AuthProvider.jsx";
+import { usePageState } from "./store/PageStateProvider.jsx";
+import { ROUTES } from "./constants/routes.js";
 import "./App.css";
 
 function App() {
-  const [count, setCount] = useState(0);
-
+  const { isLoading, modalData, setModalData } = usePageState();
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      {isLoading && <Loader />}
+      <ActionPopup />
+      <BrowserRouter>
+        <AuthProvider>
+          <>
+            <Modal isOpen={!!modalData} onClose={() => setModalData(null)}>
+              {modalData}
+            </Modal>
+            <Routes>
+              <Route element={<PrivateRoute />}>
+                <Route path={ROUTES.HOME} element={<AdminPanel />} />
+              </Route>
+              <Route path={ROUTES.LOGIN} element={<Login />} />
+              <Route path={ROUTES.REGISTER} element={<Register />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </>
+        </AuthProvider>
+      </BrowserRouter>
     </>
   );
 }
