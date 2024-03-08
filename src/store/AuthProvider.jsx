@@ -3,38 +3,33 @@ import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 import { ROUTES } from "../constants/routes.js";
 import { usePageState } from "./PageStateProvider.jsx";
+import { loginRequest } from "../api/auth/login.js";
 
 const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
-  const { setIsLoading } = usePageState();
+  const { setIsLoading, callActionStatusPopup } = usePageState();
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(localStorage.getItem("token") || "");
   const navigate = useNavigate();
   const loginAction = async (data) => {
-    setIsLoading(true);
-    try {
-      const response = await fetch("url", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      });
-      const res = await response.json();
+    loginRequest(
+      data,
+      (res) => {
+        console.log(res);
 
-      if (res.data) {
-        setUser(res.data.user);
-        setToken(res.token);
-        localStorage.setItem("token", res.token);
-        navigate(ROUTES.HOME);
-        return;
-      }
-      throw new Error(res.message);
-    } catch (err) {
-      console.error(err);
-    }
-    setIsLoading(false);
+        if (res?.status === "error") {
+          callActionStatusPopup(false, res.message);
+        }
+        // setUser(res.data.user);
+        // setToken(res.token);
+        // localStorage.setItem("token", res.token);
+        // navigate(ROUTES.HOME);
+      },
+      () => {
+        setIsLoading(false);
+      },
+    );
   };
 
   const logOut = () => {

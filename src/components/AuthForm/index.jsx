@@ -14,11 +14,13 @@ import { FormField } from "../FormField";
 import { ErrorPermissions } from "../ErrorPermissions";
 import { Button } from "../Button";
 import { LinkItem } from "../LinkItem/";
+import { ROUTES } from "../../constants/routes.js";
+import { useAuth } from "../../store/AuthProvider.jsx";
 
 import "./auth-form.scss";
-import { ROUTES } from "../../constants/routes.js";
 
 export const AuthForm = ({ isRegister }) => {
+  const { loginAction } = useAuth();
   const formDataContent = isRegister
     ? REGISTER_TEXT_CONTENT
     : LOGIN_TEXT_CONTENT;
@@ -29,10 +31,13 @@ export const AuthForm = ({ isRegister }) => {
     password: "",
   });
 
-  const isEmailError =
-    !getIsSuccsessPattern(emailPattern(input.email)) && !isFirstSubmit;
-  const isPasswordError =
-    !getIsSuccsessPattern(passwordPattern(input.password)) && !isFirstSubmit;
+  const isEmailCorrect = getIsSuccsessPattern(emailPattern(input.email));
+  const isPasswordCorrect = getIsSuccsessPattern(
+    passwordPattern(input.password),
+  );
+
+  const isEmailError = !isEmailCorrect && !isFirstSubmit;
+  const isPasswordError = !isPasswordCorrect && !isFirstSubmit;
   const isDisableSubmit = isEmailError | isPasswordError;
 
   const isShownErrorField = isRegister || isDisableSubmit;
@@ -40,8 +45,13 @@ export const AuthForm = ({ isRegister }) => {
   const handleSubmitEvent = (e) => {
     e.preventDefault();
 
+    // !isEmailError && !isPasswordError
+
     setIsFirstSubmit(false);
-    if (input.username !== "" && input.password !== "") {
+    if (isEmailCorrect && isPasswordCorrect) {
+      loginAction({
+        ...input,
+      });
       //dispatch action from hooks
     }
   };

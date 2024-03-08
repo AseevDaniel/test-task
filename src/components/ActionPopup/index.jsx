@@ -1,9 +1,6 @@
-import {
-  POPUP_LIFE_TIME,
-  usePageState,
-} from "../../store/PageStateProvider.jsx";
-import "./action-popup.scss";
+import { usePageState } from "../../store/PageStateProvider.jsx";
 import { useEffect, useState } from "react";
+import "./action-popup.scss";
 
 export const POPUP_ANIMATION_DURATION = 1000;
 export const ActionPopup = () => {
@@ -35,7 +32,7 @@ export const ActionPopup = () => {
 
   return (
     <div
-      className={`actionPopup ${(actionStatus?.isSuccess ? "" : "failure", isHide ? "hidePopup" : "")}`}
+      className={`actionPopup ${actionStatus?.isSuccess ? "" : "failure"} ${isHide ? "hidePopup" : ""}`}
     >
       <p className="message">{actionStatus?.message || "no message"}</p>
     </div>

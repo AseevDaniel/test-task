@@ -1,11 +1,11 @@
 export const LOGIN_TEXT_CONTENT = {
   title: "Login",
   linkText: "You don`t have an account?",
-  linkValue: "Register now",
+  linkValue: "Create now",
 };
 
 export const REGISTER_TEXT_CONTENT = {
-  title: "Registration",
+  title: "Sign Up",
   linkText: "You already have an account?",
   linkValue: "Login now",
 };
