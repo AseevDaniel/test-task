@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 import { ROUTES } from "../constants/routes.js";
 import { usePageState } from "./PageStateProvider.jsx";
-import { loginRequest } from "../api/auth/login.js";
+import { loginRequest, registerRequest } from "../api/auth";
 
 const AuthContext = createContext();
 
@@ -12,23 +12,50 @@ const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(localStorage.getItem("token") || "");
   const navigate = useNavigate();
+
+  const authUserSharedOperation = (data) => {
+    if (data?.status === "error") {
+      callActionStatusPopup(false, data.message);
+      return;
+    }
+    callActionStatusPopup(true, data.message);
+    setUser(data.user);
+    setToken(data.user.email);
+    localStorage.setItem("token", data.user.email);
+    navigate(ROUTES.HOME);
+  };
+
+  const onActionShared = () => {
+    setIsLoading(true);
+  };
+  const onFinallyShared = () => {
+    setIsLoading(false);
+  };
+
   const loginAction = async (data) => {
+    onActionShared();
     loginRequest(
       data,
       (res) => {
         console.log(res);
 
-        if (res?.status === "error") {
-          callActionStatusPopup(false, res.message);
-        }
-        // setUser(res.data.user);
-        // setToken(res.token);
-        // localStorage.setItem("token", res.token);
-        // navigate(ROUTES.HOME);
+        authUserSharedOperation(res);
       },
-      () => {
-        setIsLoading(false);
+      onFinallyShared,
+    );
+  };
+
+  const registerAction = async (data) => {
+    onActionShared();
+    console.log("register");
+    registerRequest(
+      data,
+      (res) => {
+        console.log(res);
+
+        authUserSharedOperation(res);
       },
+      onFinallyShared,
     );
   };
 
@@ -40,7 +67,9 @@ const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ token, user, loginAction, logOut }}>
+    <AuthContext.Provider
+      value={{ token, user, loginAction, registerAction, logOut }}
+    >
       {children}
     </AuthContext.Provider>
   );

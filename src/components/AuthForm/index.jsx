@@ -20,7 +20,7 @@ import { useAuth } from "../../store/AuthProvider.jsx";
 import "./auth-form.scss";
 
 export const AuthForm = ({ isRegister }) => {
-  const { loginAction } = useAuth();
+  const { loginAction, registerAction } = useAuth();
   const formDataContent = isRegister
     ? REGISTER_TEXT_CONTENT
     : LOGIN_TEXT_CONTENT;
@@ -49,9 +49,7 @@ export const AuthForm = ({ isRegister }) => {
 
     setIsFirstSubmit(false);
     if (isEmailCorrect && isPasswordCorrect) {
-      loginAction({
-        ...input,
-      });
+      isRegister ? registerAction(input) : loginAction(input);
       //dispatch action from hooks
     }
   };
