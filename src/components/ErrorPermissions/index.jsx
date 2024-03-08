@@ -1,5 +1,5 @@
-import "./error-permissions.scss";
 import PropTypes from "prop-types";
+import "./error-permissions.scss";
 
 export const ErrorPermissions = ({
   title,

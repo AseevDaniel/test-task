@@ -1,8 +1,8 @@
+import { AuthForm } from "@/components/index.js";
+import { ROUTES } from "@/constants/routes.js";
+import { LOGIN_TEXT_CONTENT } from "@/constants/textContent.js";
+import { useAuth } from "@/store/AuthProvider.jsx";
 import "./login.scss";
-import { AuthForm } from "../../components/index.js";
-import { ROUTES } from "../../constants/routes.js";
-import { LOGIN_TEXT_CONTENT } from "../../constants/textContent.js";
-import { useAuth } from "../../store/AuthProvider.jsx";
 
 export const Login = () => {
   const { loginAction } = useAuth();

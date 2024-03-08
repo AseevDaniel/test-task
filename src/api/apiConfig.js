@@ -1,5 +1,4 @@
 import axios from "axios";
-import { usePageState } from "../store/PageStateProvider.jsx";
 
 const BASE_URL = "http://localhost:8000";
 
@@ -14,19 +13,10 @@ export const getRequest = async ({
   onCatch,
   config,
 }) => {
-  const { callActionStatusPopup } = usePageState();
-
   return await client
     .get(url, config)
-    .then((res) => {
-      // pageState.removeLoading(url);
-      return onGet?.(res);
-    })
-    .catch((err) => {
-      onCatch(err);
-      console.log(err);
-      callActionStatusPopup(false);
-    })
+    .then(onGet)
+    .catch(onCatch)
     .finally(onFinally);
 };
 

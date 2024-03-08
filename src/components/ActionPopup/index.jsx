@@ -1,6 +1,6 @@
-import { usePageState } from "../../store/PageStateProvider.jsx";
 import { useEffect, useState } from "react";
-import { useDelayedUnmount } from "../../hooks/useDelayedUnmount.jsx";
+import { useDelayedUnmount } from "@/hooks/useDelayedUnmount.jsx";
+import { usePageState } from "@/store/PageStateProvider.jsx";
 
 import "./action-popup.scss";
 

@@ -1,5 +1,5 @@
-import "./input.scss";
 import PropTypes from "prop-types";
+import "./input.scss";
 
 export const Input = ({ isError, innerRef, ...props }) => {
   return (

@@ -29,7 +29,7 @@
     }
     .settingsIcon {
       margin-right: 12px;
-      animation: rotate 2s linear infinite;
+      animation: rotation 2s linear infinite;
       animation-play-state: paused;
       &:hover {
         animation-play-state: running;

@@ -6,15 +6,10 @@ import {
   passwordPattern,
 } from "@/helpers/patterns.js";
 import { EMAIL_ERRORS, PASSWORD_ERRORS } from "@/constants/errors.js";
-import {
-  LOGIN_TEXT_CONTENT,
-  REGISTER_TEXT_CONTENT,
-} from "@/constants/textContent.js";
 import { FormField } from "../FormField";
 import { ErrorPermissions } from "../ErrorPermissions";
 import { Button } from "../Button";
 import { LinkItem } from "../LinkItem/";
-
 import "./auth-form.scss";
 
 export const AuthForm = ({ formContent }) => {

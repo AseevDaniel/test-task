@@ -1,8 +1,7 @@
-import { Input } from "../Input";
-import PropTypes from "prop-types";
 import { useState } from "react";
+import PropTypes from "prop-types";
+import { Input } from "../Input";
 import { EyeHideIcon, EyeShownIcon } from "@/assets/icons";
-
 import "./form-field.scss";
 
 export const FormField = ({ name, ...props }) => {

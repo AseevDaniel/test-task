@@ -1,9 +1,9 @@
 import { useContext, createContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
-import { ROUTES } from "../constants/routes.js";
+import { ROUTES } from "@/constants/routes.js";
 import { usePageState } from "./PageStateProvider.jsx";
-import { loginRequest, registerRequest, updateRequest } from "../api/auth";
+import { loginRequest, registerRequest, updateRequest } from "@/api/auth";
 
 const AuthContext = createContext();
 

@@ -1,6 +1,6 @@
-import "./link-item.scss";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
+import "./link-item.scss";
 
 export const LinkItem = ({ children, ...props }) => {
   return (

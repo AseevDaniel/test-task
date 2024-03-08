@@ -1,8 +1,7 @@
-import "./confirm-password.scss";
-import { FormField } from "../../../FormField/index.jsx";
-import PropTypes from "prop-types";
-import { Button } from "../../../Button/index.jsx";
 import { useRef } from "react";
+import PropTypes from "prop-types";
+import { Button, FormField } from "@/components";
+import "./confirm-password.scss";
 
 export const ConfirmPassword = ({ onEnter }) => {
   const inputRef = useRef(null);

@@ -1,8 +1,8 @@
+import { AuthForm } from "@/components";
+import { ROUTES } from "@/constants/routes.js";
+import { useAuth } from "@/store/AuthProvider.jsx";
+import { REGISTER_TEXT_CONTENT } from "@/constants/textContent.js";
 import "./register.scss";
-import { AuthForm } from "../../components/index.js";
-import { ROUTES } from "../../constants/routes.js";
-import { useAuth } from "../../store/AuthProvider.jsx";
-import { REGISTER_TEXT_CONTENT } from "../../constants/textContent.js";
 
 export const Register = () => {
   const { registerAction } = useAuth();

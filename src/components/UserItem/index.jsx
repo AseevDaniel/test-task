@@ -1,8 +1,8 @@
-import { LogoutIcon, SettingsIcon } from "@/assets/icons";
 import PropTypes from "prop-types";
-import { UserSettings } from "./components/UserSettings/index.jsx";
 import { useState } from "react";
-import { useAuth } from "../../store/AuthProvider.jsx";
+import { useAuth } from "@/store/AuthProvider.jsx";
+import { LogoutIcon, SettingsIcon } from "@/assets/icons";
+import { UserSettings } from "./components/UserSettings/index.jsx";
 import "./user-item.scss";
 
 export const UserItem = ({ user }) => {

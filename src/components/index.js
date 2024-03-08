@@ -8,3 +8,4 @@ export { Loader } from "./Loader";
 export { UserItem } from "./UserItem";
 export { ActionPopup } from "./ActionPopup";
 export { PrivateRoute } from "./PrivateRoute";
+export { Modal } from "./Modal";

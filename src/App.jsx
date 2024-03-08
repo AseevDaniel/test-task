@@ -1,11 +1,10 @@
-import { AdminPanel, Login, Register, NotFound } from "./pages/index.js";
-import "./App.css";
-import { Loader, PrivateRoute, ActionPopup } from "@/components";
-import AuthProvider from "./store/AuthProvider.jsx";
 import { Routes, Route, BrowserRouter } from "react-router-dom";
+import { Loader, PrivateRoute, ActionPopup, Modal } from "./components";
+import { AdminPanel, Login, Register, NotFound } from "./pages";
+import AuthProvider from "./store/AuthProvider.jsx";
 import { usePageState } from "./store/PageStateProvider.jsx";
 import { ROUTES } from "./constants/routes.js";
-import { Modal } from "./components/Modal/index.jsx";
+import "./App.css";
 
 function App() {
   const { isLoading, modalData, setModalData } = usePageState();

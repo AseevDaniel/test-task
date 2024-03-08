@@ -1,6 +1,6 @@
-import "./modal.scss";
 import PropTypes from "prop-types";
-import { CloseIcon } from "../../assets/icons/index.js";
+import { CloseIcon } from "@/assets/icons/index.js";
+import "./modal.scss";
 
 export const Modal = ({ isOpen, onClose, children }) => {
   if (!isOpen) return null;

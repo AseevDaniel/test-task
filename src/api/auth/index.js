@@ -1,4 +1,4 @@
-import { postRequest } from "../apiConfig.jsx";
+import { postRequest } from "../apiConfig.js";
 
 const LOGIN_URL = "/login";
 const UPDATE_URL = "/update";

@@ -1,13 +1,12 @@
+import { createContext, useContext, useState } from "react";
 import PropTypes from "prop-types";
 import {
   actionSatusDefaultFaliure,
   actionSatusDefaultSuccess,
-} from "../constants/textContent.js";
-import { createContext, useContext, useState } from "react";
+} from "@/constants/textContent.js";
+import { POPUP_LIFE_TIME } from "@/constants/durations.js";
 
 const PageStateContext = createContext();
-
-export const POPUP_LIFE_TIME = 3000;
 
 const PageStateProvider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(false);
