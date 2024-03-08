@@ -1,17 +1,19 @@
 .userItem {
   position: relative;
   .userField {
+    position: relative;
+    z-index: 2;
     background: $color-main-light;
     border-radius: 18px;
     padding: 18px 24px;
-    box-shadow: 0px 0px 30px -25px $color-main-text;
+    box-shadow: 0px 0px 30px -20px $color-main-text;
     width: 100%;
     display: flex;
     align-items: center;
     //justify-content: space-between;
     transition: $box-shadow-hover-duration;
     &:hover {
-      box-shadow: 0px 0px 30px -15px $color-main-text;
+      box-shadow: 0px 0px 30px -12px $color-main-text;
     }
     &--icon {
       height: 20px;
@@ -35,5 +37,9 @@
     }
     .logoutIcon {
     }
+  }
+  .userSettings {
+    position: relative;
+    z-index: 1;
   }
 }

@@ -1,12 +1,13 @@
-import "./user-item.scss";
 import { LogoutIcon, SettingsIcon } from "@/assets/icons";
 import PropTypes from "prop-types";
 import { UserSettings } from "./components/UserSettings/index.jsx";
 import { useState } from "react";
-import { usePageState } from "../../store/PageStateProvider.jsx";
+import { useAuth } from "../../store/AuthProvider.jsx";
+import "./user-item.scss";
+
 export const UserItem = ({ user }) => {
-  const [isUserSettingsActive, setIsUserSettingsActive] = useState(true);
-  const { callActionStatusPopup } = usePageState();
+  const [isUserSettingsActive, setIsUserSettingsActive] = useState(false);
+  const { logOut } = useAuth();
 
   if (!user) return null;
 
@@ -14,14 +15,14 @@ export const UserItem = ({ user }) => {
     <div className="userItem">
       <div className="userField">
         <SettingsIcon
-          onClick={() => callActionStatusPopup()}
+          onClick={() => setIsUserSettingsActive(!isUserSettingsActive)}
           title="User Settings"
           className="userField--icon settingsIcon"
         />
         <span>{user?.email}</span>
-        <LogoutIcon className="userField--icon logoutIcon" />
+        <LogoutIcon onClick={logOut} className="userField--icon logoutIcon" />
       </div>
-      {isUserSettingsActive && <UserSettings className="lol" />}
+      <UserSettings isActive={isUserSettingsActive} />
     </div>
   );
 };

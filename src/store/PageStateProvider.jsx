@@ -12,6 +12,7 @@ export const POPUP_LIFE_TIME = 3000;
 const PageStateProvider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [currentActionStatus, setCurrentActionStatus] = useState(null);
+  const [modalData, setModalData] = useState(null);
   const isPopupShown = !!currentActionStatus;
 
   const callActionStatusPopup = (isSuccess = true, message = null) => {
@@ -32,6 +33,8 @@ const PageStateProvider = ({ children }) => {
   return (
     <PageStateContext.Provider
       value={{
+        modalData,
+        setModalData,
         isLoading,
         setIsLoading,
         currentActionStatus,

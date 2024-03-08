@@ -14,16 +14,12 @@ import { FormField } from "../FormField";
 import { ErrorPermissions } from "../ErrorPermissions";
 import { Button } from "../Button";
 import { LinkItem } from "../LinkItem/";
-import { ROUTES } from "../../constants/routes.js";
-import { useAuth } from "../../store/AuthProvider.jsx";
 
 import "./auth-form.scss";
 
-export const AuthForm = ({ isRegister }) => {
-  const { loginAction, registerAction } = useAuth();
-  const formDataContent = isRegister
-    ? REGISTER_TEXT_CONTENT
-    : LOGIN_TEXT_CONTENT;
+export const AuthForm = ({ formContent }) => {
+  const { formDataContent, isShowFieldsRules, onSubmit, redirectLink } =
+    formContent;
 
   const [isFirstSubmit, setIsFirstSubmit] = useState(true);
   const [input, setInput] = useState({
@@ -40,17 +36,14 @@ export const AuthForm = ({ isRegister }) => {
   const isPasswordError = !isPasswordCorrect && !isFirstSubmit;
   const isDisableSubmit = isEmailError | isPasswordError;
 
-  const isShownErrorField = isRegister || isDisableSubmit;
+  const isShownErrorField = isShowFieldsRules || isDisableSubmit;
 
   const handleSubmitEvent = (e) => {
     e.preventDefault();
 
-    // !isEmailError && !isPasswordError
-
     setIsFirstSubmit(false);
     if (isEmailCorrect && isPasswordCorrect) {
-      isRegister ? registerAction(input) : loginAction(input);
-      //dispatch action from hooks
+      onSubmit(input);
     }
   };
 
@@ -95,20 +88,26 @@ export const AuthForm = ({ isRegister }) => {
           ) : null}
         </div>
         <Button disabled={isDisableSubmit} type="submit">
-          Submit
+          {formContent.submitButtonText || "Submit"}
         </Button>
 
-        <span className="anotherPageLink">
-          {formDataContent.linkText}{" "}
-          <LinkItem to={isRegister ? ROUTES.LOGIN : ROUTES.REGISTER}>
-            {formDataContent.linkValue}
-          </LinkItem>
-        </span>
+        {redirectLink ? (
+          <span className="anotherPageLink">
+            {formDataContent?.linkText}{" "}
+            <LinkItem to={redirectLink}>{formDataContent?.linkValue}</LinkItem>
+          </span>
+        ) : null}
       </form>
     </div>
   );
 };
 
 AuthForm.propTypes = {
-  isRegister: PropTypes.bool,
+  formContent: PropTypes.shape({
+    formDataContent: PropTypes.object,
+    isShowFieldsRules: PropTypes.bool,
+    onSubmit: PropTypes.func,
+    redirectLink: PropTypes.string,
+    submitButtonText: PropTypes.string,
+  }),
 };

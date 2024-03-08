@@ -10,6 +10,10 @@ export const REGISTER_TEXT_CONTENT = {
   linkValue: "Login now",
 };
 
+export const UPDATE_DATA_TEXT_CONTENT = {
+  title: "Update your information",
+};
+
 export const actionSatusDefaultSuccess = {
   isSuccess: true,
   message: "Success!",

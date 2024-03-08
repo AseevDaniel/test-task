@@ -1,21 +1,25 @@
-import { postRequest } from "../apiConfig.js";
+import { postRequest } from "../apiConfig.jsx";
 
 const LOGIN_URL = "/login";
-const REGISTER_URL = "http://localhost:8001";
-export const loginRequest = (data, onPost, onFinally) => {
+const UPDATE_URL = "/update";
+const REGISTER_URL = "/register";
+export const loginRequest = (requestData) => {
   return postRequest({
     url: LOGIN_URL,
-    data,
-    onPost,
-    onFinally,
+    ...requestData,
   });
 };
 
-export const registerRequest = (data, onPost, onFinally) => {
+export const updateRequest = (requestData) => {
+  return postRequest({
+    url: UPDATE_URL,
+    ...requestData,
+  });
+};
+
+export const registerRequest = (requestData) => {
   return postRequest({
     url: REGISTER_URL,
-    data,
-    onPost,
-    onFinally,
+    ...requestData,
   });
 };

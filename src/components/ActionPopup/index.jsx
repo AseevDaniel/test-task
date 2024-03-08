@@ -1,13 +1,14 @@
 import { usePageState } from "../../store/PageStateProvider.jsx";
 import { useEffect, useState } from "react";
+import { useDelayedUnmount } from "../../hooks/useDelayedUnmount.jsx";
+
 import "./action-popup.scss";
-import { UseDelayedUnmount } from "../../hooks/useDelayedUnmount.jsx";
 
 export const ActionPopup = () => {
   const { currentActionStatus } = usePageState();
   const [actionStatus, setActionStatus] = useState(currentActionStatus);
 
-  const { isHide } = UseDelayedUnmount(!!currentActionStatus, () =>
+  const { isHide } = useDelayedUnmount(!!currentActionStatus, () =>
     setActionStatus(null),
   );
 

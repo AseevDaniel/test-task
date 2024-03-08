@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 import { ROUTES } from "../constants/routes.js";
 import { usePageState } from "./PageStateProvider.jsx";
-import { loginRequest, registerRequest } from "../api/auth";
+import { loginRequest, registerRequest, updateRequest } from "../api/auth";
 
 const AuthContext = createContext();
 
@@ -15,12 +15,19 @@ const AuthProvider = ({ children }) => {
   const [token, setToken] = useState(localStorage.getItem("token") || "");
   const navigate = useNavigate();
 
-  const authUserSharedOperation = (data) => {
+  const authUserSharedOperation = (data, isNewData = false) => {
     if (data?.status === "error") {
       callActionStatusPopup(false, data.message);
       return;
     }
+
     callActionStatusPopup(true, data.message);
+
+    if (isNewData) {
+      logOut();
+      return;
+    }
+
     setUser(data.user);
     setToken(data.user.email);
     localStorage.setItem("user", JSON.stringify(data.user));
@@ -31,35 +38,50 @@ const AuthProvider = ({ children }) => {
   const onActionShared = () => {
     setIsLoading(true);
   };
-  const onFinallyShared = () => {
+  const onFinally = () => {
     setIsLoading(false);
+  };
+
+  const onCatch = (err) => {
+    callActionStatusPopup(false, err.message);
   };
 
   const loginAction = async (data) => {
     onActionShared();
-    loginRequest(
+    loginRequest({
       data,
-      (res) => {
-        console.log(res);
-
+      onPost: (res) => {
         authUserSharedOperation(res);
       },
-      onFinallyShared,
-    );
+      onFinally,
+      onCatch,
+    });
+  };
+
+  const updateAction = async (data) => {
+    onActionShared();
+    updateRequest({
+      data,
+      onPost: (res) => {
+        authUserSharedOperation(res, true);
+      },
+      onFinally,
+      onCatch,
+    });
   };
 
   const registerAction = async (data) => {
     onActionShared();
-    console.log("register");
-    registerRequest(
+    registerRequest({
       data,
-      (res) => {
+      onPost: (res) => {
         console.log(res);
 
-        authUserSharedOperation(res);
+        authUserSharedOperation(res, true);
       },
-      onFinallyShared,
-    );
+      onFinally,
+      onCatch,
+    });
   };
 
   const logOut = () => {
@@ -72,7 +94,7 @@ const AuthProvider = ({ children }) => {
 
   return (
     <AuthContext.Provider
-      value={{ token, user, loginAction, registerAction, logOut }}
+      value={{ token, user, loginAction, updateAction, registerAction, logOut }}
     >
       {children}
     </AuthContext.Provider>
