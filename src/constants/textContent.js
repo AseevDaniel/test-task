@@ -9,3 +9,12 @@ export const REGISTER_TEXT_CONTENT = {
   linkText: "You already have an account?",
   linkValue: "Login now",
 };
+
+export const actionSatusDefaultSuccess = {
+  isSuccess: true,
+  message: "Success!",
+};
+export const actionSatusDefaultFaliure = {
+  isSuccess: false,
+  message: "Something went wrong...",
+};

@@ -1,7 +1,7 @@
 import { Input } from "../Input";
 import PropTypes from "prop-types";
 import { useState } from "react";
-import { EyeHide, EyeShown } from "@/assets/icons";
+import { EyeHideIcon, EyeShownIcon } from "@/assets/icons";
 
 import "./form-field.scss";
 
@@ -24,7 +24,7 @@ export const FormField = ({ name, ...props }) => {
           className="passwordEyeIcon"
           onClick={() => setIsShowValue((prevValue) => !prevValue)}
         >
-          {isShowValue ? <EyeHide /> : <EyeShown />}
+          {isShowValue ? <EyeHideIcon /> : <EyeShownIcon />}
         </span>
       ) : null}
     </div>

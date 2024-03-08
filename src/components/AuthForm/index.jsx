@@ -5,17 +5,18 @@ import {
   getIsSuccsessPattern,
   passwordPattern,
 } from "@/helpers/patterns.js";
-import { emailErrors, passwordErrors } from "@/constants/errors.js";
+import { EMAIL_ERRORS, PASSWORD_ERRORS } from "@/constants/errors.js";
 import {
   LOGIN_TEXT_CONTENT,
   REGISTER_TEXT_CONTENT,
 } from "@/constants/textContent.js";
-import { FormField } from "../FormField/index.jsx";
-import { ErrorPermissions } from "../ErrorPermissions/index.jsx";
-import { Button } from "../Button/index.jsx";
-import { Link } from "../Link/index.jsx";
+import { FormField } from "../FormField";
+import { ErrorPermissions } from "../ErrorPermissions";
+import { Button } from "../Button";
+import { LinkItem } from "../LinkItem/";
 
 import "./auth-form.scss";
+import { ROUTES } from "../../constants/routes.js";
 
 export const AuthForm = ({ isRegister }) => {
   const formDataContent = isRegister
@@ -66,7 +67,7 @@ export const AuthForm = ({ isRegister }) => {
           {isShownErrorField ? (
             <ErrorPermissions
               currentPermissions={emailPattern(input.email)}
-              errorMessages={emailErrors}
+              errorMessages={EMAIL_ERRORS}
             />
           ) : null}
         </div>
@@ -81,7 +82,7 @@ export const AuthForm = ({ isRegister }) => {
             <ErrorPermissions
               title="Your password should:"
               currentPermissions={passwordPattern(input.password)}
-              errorMessages={passwordErrors}
+              errorMessages={PASSWORD_ERRORS}
             />
           ) : null}
         </div>
@@ -90,7 +91,10 @@ export const AuthForm = ({ isRegister }) => {
         </Button>
 
         <span className="anotherPageLink">
-          {formDataContent.linkText} <Link>{formDataContent.linkValue}</Link>
+          {formDataContent.linkText}{" "}
+          <LinkItem to={isRegister ? ROUTES.LOGIN : ROUTES.REGISTER}>
+            {formDataContent.linkValue}
+          </LinkItem>
         </span>
       </form>
     </div>

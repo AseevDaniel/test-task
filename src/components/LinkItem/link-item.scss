@@ -1,4 +1,4 @@
-.link {
+a {
   @include font-josefin(regular, 14px, $color-theme);
   transition: $transition-duration;
   &:hover {
