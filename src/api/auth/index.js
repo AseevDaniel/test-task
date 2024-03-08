@@ -1,7 +1,7 @@
 import { postRequest } from "../apiConfig.js";
 
 const LOGIN_URL = "/login";
-const REGISTER_URL = "/register";
+const REGISTER_URL = "http://localhost:8001";
 export const loginRequest = (data, onPost, onFinally) => {
   return postRequest({
     url: LOGIN_URL,

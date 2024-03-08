@@ -9,7 +9,9 @@ const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
   const { setIsLoading, callActionStatusPopup } = usePageState();
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(
+    JSON.parse(localStorage.getItem("user")) || null,
+  );
   const [token, setToken] = useState(localStorage.getItem("token") || "");
   const navigate = useNavigate();
 
@@ -21,6 +23,7 @@ const AuthProvider = ({ children }) => {
     callActionStatusPopup(true, data.message);
     setUser(data.user);
     setToken(data.user.email);
+    localStorage.setItem("user", JSON.stringify(data.user));
     localStorage.setItem("token", data.user.email);
     navigate(ROUTES.HOME);
   };
@@ -62,6 +65,7 @@ const AuthProvider = ({ children }) => {
   const logOut = () => {
     setUser(null);
     setToken("");
+    localStorage.removeItem("user");
     localStorage.removeItem("token");
     navigate(ROUTES.LOGIN);
   };

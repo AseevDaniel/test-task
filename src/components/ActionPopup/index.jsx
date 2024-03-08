@@ -1,31 +1,18 @@
 import { usePageState } from "../../store/PageStateProvider.jsx";
 import { useEffect, useState } from "react";
 import "./action-popup.scss";
+import { UseDelayedUnmount } from "../../hooks/useDelayedUnmount.jsx";
 
-export const POPUP_ANIMATION_DURATION = 1000;
 export const ActionPopup = () => {
-  const [timerId, setTimerId] = useState(null);
   const { currentActionStatus } = usePageState();
-  const [isHide, setIsHide] = useState(false);
   const [actionStatus, setActionStatus] = useState(currentActionStatus);
 
-  const onCLosePopup = () => {
-    setIsHide(true);
-
-    const newTimerId = setTimeout(() => {
-      setActionStatus(null);
-      setIsHide(null);
-    }, POPUP_ANIMATION_DURATION);
-    setTimerId(newTimerId);
-  };
+  const { isHide } = UseDelayedUnmount(!!currentActionStatus, () =>
+    setActionStatus(null),
+  );
 
   useEffect(() => {
-    if (timerId) {
-      setIsHide(false);
-      clearTimeout(timerId);
-    }
-
-    currentActionStatus ? setActionStatus(currentActionStatus) : onCLosePopup();
+    if (currentActionStatus) setActionStatus(currentActionStatus);
   }, [currentActionStatus]);
 
   if (!actionStatus) return null;

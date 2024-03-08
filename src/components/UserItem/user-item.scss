@@ -1,0 +1,39 @@
+.userItem {
+  position: relative;
+  .userField {
+    background: $color-main-light;
+    border-radius: 18px;
+    padding: 18px 24px;
+    box-shadow: 0px 0px 30px -25px $color-main-text;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    //justify-content: space-between;
+    transition: $box-shadow-hover-duration;
+    &:hover {
+      box-shadow: 0px 0px 30px -15px $color-main-text;
+    }
+    &--icon {
+      height: 20px;
+      width: 20px;
+      transition: $transition-duration;
+      &:hover {
+        cursor: pointer;
+        scale: 1.1;
+      }
+    }
+    span {
+      margin-right: auto;
+    }
+    .settingsIcon {
+      margin-right: 12px;
+      animation: rotate 2s linear infinite;
+      animation-play-state: paused;
+      &:hover {
+        animation-play-state: running;
+      }
+    }
+    .logoutIcon {
+    }
+  }
+}
